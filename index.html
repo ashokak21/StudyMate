@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudyMate – Study Material Helper</title>
+<style>
+:root{--bg:#f6f3ee;--card:#fffdf9;--tx:#22302c;--mu:#6b7a75;--pr:#0f766e;--pr2:#d97706;--bd:#e6e0d6;--dn:#b42318;--side:#12332f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1715;--card:#16211e;--tx:#e8efec;--mu:#90a39c;--bd:#27362f;--pr:#2dd4bf;--side:#0a1210}}
+:root[data-theme="dark"]{--bg:#0f1715;--card:#16211e;--tx:#e8efec;--mu:#90a39c;--bd:#27362f;--pr:#2dd4bf;--side:#0a1210}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0}
+.shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--side);color:#dfeee9;padding:20px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+aside .logo{font:700 20px Georgia,serif;margin-bottom:2px}aside .logo span{color:#fbbf24}aside small{opacity:.7;margin-bottom:16px;display:block}
+aside button{background:none;color:inherit;border:0;text-align:left;padding:9px 12px;border-radius:8px;cursor:pointer;font:inherit}
+aside button:hover{background:rgba(255,255,255,.08)}aside button.on{background:rgba(255,255,255,.15);font-weight:600}
+aside .sp{flex:1}aside .me{font-size:12px;opacity:.8;padding:8px 12px}
+main{padding:26px;max-width:980px;width:100%}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px;flex-wrap:wrap}.top h2{font-size:26px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:16px}
+.card h3{font-size:17px;margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--pr2);border-radius:12px;padding:14px}.stat b{font:700 28px Georgia,serif;display:block}.stat span{color:var(--mu);font-size:13px}
+button.b{background:var(--pr);color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
+button.g{background:transparent;color:var(--pr);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}button.d{background:var(--dn);color:#fff;border:0;border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:12px}
+label{font-size:12px;color:var(--mu);display:block;margin-bottom:3px}
+.mat{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--bd);flex-wrap:wrap}.mat:first-of-type{border-top:0}
+.ico{width:42px;height:42px;border-radius:10px;background:color-mix(in srgb,var(--pr) 14%,transparent);display:grid;place-items:center;font-size:20px}
+.mat .i{flex:1;min-width:200px}.mat .i p{margin:2px 0;color:var(--mu);font-size:13px}
+.tag{font-size:11px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:1px 9px;color:var(--mu);margin-right:4px}
+.star{background:none;border:0;font-size:20px;cursor:pointer;color:var(--pr2)}
+.ann{border-left:3px solid var(--pr2);padding:6px 12px;margin-bottom:8px;background:var(--bg);border-radius:0 8px 8px 0}
+.note{color:var(--mu);font-size:12px}.err{color:var(--dn);font-size:13px;min-height:20px}.ok{color:var(--pr);font-size:13px}
+.table{width:100%;border-collapse:collapse}.table td,.table th{text-align:left;padding:8px;border-top:1px solid var(--bd);font-size:14px}
+.auth{max-width:1040px;margin:5vh auto;display:grid;grid-template-columns:1.15fr 1fr;border-radius:18px;overflow:hidden;border:1px solid var(--bd);background:var(--card)}
+.brand{background:var(--side);color:#e8f5f1;padding:40px;display:flex;flex-direction:column;justify-content:center}
+.brand h1{font-size:32px;margin-bottom:6px}.brand h1 span{color:#fbbf24}.brand p{opacity:.85}.brand li{margin:8px 0}.brand ul{padding-left:18px}
+.form{padding:36px}.form h2{font-size:24px;margin-bottom:4px}.form .row{grid-template-columns:1fr}
+.link{color:var(--pr);cursor:pointer;background:none;border:0;padding:0;text-decoration:underline;font:inherit}
+.demo{background:var(--bg);border:1px dashed var(--bd);border-radius:8px;padding:10px;margin-top:14px;font-size:12px;color:var(--mu)}
+.pf{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.av{width:92px;height:92px;border-radius:50%;background:var(--pr);color:#fff;display:grid;place-items:center;font:700 32px Georgia,serif;overflow:hidden;flex:none;border:3px solid var(--pr2)}.av img{width:100%;height:100%;object-fit:cover}.pi{flex:1;min-width:220px}.pi p{margin:4px 0}.sm{height:6px;border-radius:4px;background:var(--bd);overflow:hidden;margin:6px 0 2px}.sm i{display:block;height:100%;width:0;transition:.2s}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+@media(max-width:760px){.shell{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px}aside .sp,aside small,aside .me{display:none}aside .logo{width:100%}main{padding:16px}.auth{grid-template-columns:1fr;margin:0}}
+.brand .ab{font-size:14px;line-height:1.55;opacity:.9;margin:10px 0 0}
+.brand .pts{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:12px}
+.brand .pts li{display:flex;gap:11px;margin:0;align-items:center}
+.pts .pi2{font-size:17px;width:34px;height:34px;flex:none;border-radius:9px;background:rgba(255,255,255,.1);display:grid;place-items:center}
+.pts b{display:block;font-size:14px}.pts .d{display:block;font-size:12.5px;opacity:.8;line-height:1.35}
+.brand .ft{margin-top:18px;font-size:12px;opacity:.65;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
+</style></head><body><div id="app"></div>
+<script>
+const KEY='studymate_v5',RE=/^RA2511\d{9}$/i;
+const DEPTS=['Computer Science','Information Technology','Electronics','Mechanical','Civil'];
+const seed={users:[{id:1,name:'System Admin',username:'admin',pw:'admin123',role:'admin',email:'admin@college.edu'},{id:2,name:'Dr. Meena Kumar',username:'meena',pw:'faculty123',role:'faculty',email:'meena@college.edu',dept:'Computer Science'},{id:3,name:'Prof. Ravi S.',username:'ravi',pw:'faculty123',role:'faculty',email:'ravi@college.edu',dept:'Computer Science'},{id:4,name:'Arun Kumar',username:'ra2511000000001',pw:'student123',role:'student',email:'arun@college.edu',dept:'Computer Science',saved:[1]},{id:5,name:'Divya R.',username:'ra2511000000002',pw:'student123',role:'student',email:'divya@college.edu',dept:'Information Technology',saved:[]}],
+subjects:['Database Management','Operating Systems','Data Structures'],
+mats:[{id:1,title:'Chapter 1 – Introduction to DBMS',desc:'ER model, keys and relational basics.',subject:'Database Management',unit:'Unit 1',type:'Lecture Notes',uid:2,by:'Dr. Meena Kumar',date:'2026-09-02',file:'dbms-ch1.pdf',dl:42},
+{id:2,title:'SQL Basics Cheat Sheet',desc:'Quick reference for SELECT, JOIN, GROUP BY.',subject:'Database Management',unit:'Unit 2',type:'Reference',uid:2,by:'Dr. Meena Kumar',date:'2026-09-10',file:'sql-basics.pdf',dl:67},
+{id:3,title:'Process Scheduling Slides',desc:'FCFS, SJF, Round Robin with examples.',subject:'Operating Systems',unit:'Unit 2',type:'Lecture Notes',uid:3,by:'Prof. Ravi S.',date:'2026-09-15',file:'scheduling.pptx',dl:31},
+{id:4,title:'Assignment 1 – Linked Lists',desc:'Implement singly and doubly linked lists.',subject:'Data Structures',unit:'Unit 1',type:'Assignment',uid:3,by:'Prof. Ravi S.',date:'2026-09-20',file:'ll-assign.pdf',dl:18}],
+anns:[{id:1,text:'Internal test 1 begins next Monday. Revise Units 1–2.',uid:2,by:'Dr. Meena Kumar',date:'2026-10-05'}],nid:10};
+let editId=0,D,me=null,view='',files={},mode='login',fails=0,lock=0,F={q:'',s:'',t:'',o:'new'};
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}};
+const today=()=>new Date().toISOString().slice(0,10),show=u=>u.role==='student'?u.username.toUpperCase():u.username;
+const ICON={'Lecture Notes':'📘','Assignment':'📝','Reference':'📑','Question Paper':'❓','Video':'🎬'};
+async function enc(u,p){const s=u.toLowerCase()+':'+p+':studymate';try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
+const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('studymate_files',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const fput=async(k,v)=>{try{const d=await idb();return await new Promise(r=>{const t=d.transaction('f','readwrite');t.objectStore('f').put(v,k);t.oncomplete=()=>r(true);t.onerror=()=>r(false)})}catch(e){return false}};
+const fget=async k=>{try{const d=await idb();return await new Promise(r=>{const q=d.transaction('f').objectStore('f').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)})}catch(e){return null}};
+const fdel=async k=>{try{const d=await idb();d.transaction('f','readwrite').objectStore('f').delete(k)}catch(e){}};
+async function init(){try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+ if(!D){D=JSON.parse(JSON.stringify(seed));for(const u of D.users)u.pw=await enc(u.username,u.pw);save()}try{const s=localStorage.getItem('studymate_me');me=s?D.users.find(u=>u.id==s)||null:null;if(me)view='dash'}catch(e){}let late=false;try{if(me&&Date.now()-(+localStorage.getItem('studymate_last')||0)>IDLE_MS){late=true;me=null;localStorage.removeItem('studymate_me')}}catch(e){}render();if(late)$('#err').textContent='You were logged out after 30 minutes of inactivity.'}
+const opts=(a,s)=>a.map(x=>`<option ${x===s?'selected':''}>${esc(x)}</option>`).join('');
+const UNITS=['Unit 1','Unit 2','Unit 3','Unit 4','Unit 5'],TYPES=Object.keys(ICON);
+function theme(){const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'}
+function setMode(m){mode=m;render()}
+async function doLogin(){const n=Date.now();if(n<lock)return $('#err').textContent='Too many attempts. Wait '+Math.ceil((lock-n)/1000)+'s.';
+ const un=$('#lu').value.trim().toLowerCase(),u=D.users.find(x=>x.username===un||(x.email||'').toLowerCase()===un);
+ if(u&&u.pw===await enc(u.username,$('#lp').value)){fails=0;try{localStorage.setItem('studymate_me',u.id);localStorage.setItem('studymate_last',Date.now())}catch(e){}me=u;me.prev=me.last;me.last=new Date().toLocaleString();save();view='dash';render()}else{if(++fails>=5){lock=Date.now()+30000;fails=0}$('#err').textContent='Invalid ID or password.'}}
+async function doReg(){const g=i=>$('#'+i).value.trim(),er=m=>$('#err').textContent=m,rn=g('rr').toUpperCase(),p=$('#rp').value;
+ if(!g('rn')||!g('re')||!rn||!p)return er('Please fill all fields.');
+ if(!RE.test(rn))return er('Registration number must be RA2511 followed by 9 digits (e.g. RA2511000000123).');
+ if(p.length<6)return er('Password must be at least 6 characters.');if(p!==$('#rc').value)return er('Passwords do not match.');
+ if(D.users.some(x=>x.username===rn.toLowerCase()))return er('This registration number is already registered.');if(!/^\S+@\S+\.\S+$/.test(g('re')))return er('Enter a valid email address.');if(D.users.some(x=>(x.email||'').toLowerCase()===g('re').toLowerCase()))return er('This email is already registered.');
+ D.users.push({id:D.nid++,name:g('rn'),email:g('re'),dept:$('#rd').value,username:rn.toLowerCase(),pw:await enc(rn,p),role:'student',saved:[],joined:today()});save();mode='login';render();$('#err').innerHTML='<span class="ok">Registered! Sign in with your registration number.</span>'}
+function logout(){if(!confirm('Are you sure you want to log out?'))return;try{localStorage.removeItem('studymate_me')}catch(e){}me=null;mode='login';render()}
+function nav(v){view=v;render()}
+function authView(){const L=mode==='login';
+ return `<div class="auth"><div class="brand"><h1>Study<span>Mate</span></h1><p>Your Study Material Helper</p><p class="ab">StudyMate is a web-based study material management system that connects faculty and students. Faculty publish and update course materials, and students browse, save and download them anytime.</p><ul class="pts"><li><span class="pi2">📚</span><span><b>Centralized study materials</b></span></li><li><span class="pi2">👥</span><span><b>Role-based access for admin, faculty and students</b></span></li><li><span class="pi2">🔐</span><span><b>Secure login with auto logout</b></span></li></ul><div class="ft">Built for faculty, students and administrators.</div></div><div class="form">`+(L?
+ `<h2>Welcome back</h2><p class="note">Sign in with your email ID, registration number or username.</p><br><div class="row"><div><label>Email ID / Registration No. / Username</label><input id="lu" placeholder="name@college.edu" autocomplete="username"></div><div><label>Password</label><input id="lp" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div></div><div class="err" id="err"></div><button class="b" onclick="doLogin()">Sign in</button><p class="note">New student? <button class="link" onclick="setMode('reg')">Register</button></p><div class="demo"><b>Demo accounts</b><br>Student: arun@college.edu / student123<br>Faculty: meena@college.edu / faculty123<br>Admin: admin@college.edu / admin123</div>`:
+ `<h2>Student registration</h2><p class="note">Faculty accounts are created by the admin.</p><br><div class="row"><div><label>Full name</label><input id="rn"></div><div><label>Registration No. (RA2511 + 9 digits)</label><input id="rr" maxlength="15" placeholder="RA2511000000123"></div><div><label>Email</label><input id="re" type="email"></div><div><label>Department</label><select id="rd">${opts(DEPTS)}</select></div><div><label>Password</label><input id="rp" type="password"></div><div><label>Confirm password</label><input id="rc" type="password"></div></div><div class="err" id="err"></div><button class="b" onclick="doReg()">Create account</button><p class="note">Already registered? <button class="link" onclick="setMode('login')">Sign in</button></p>`)+`</div></div>`}
+const NAV={admin:[['dash','🏠 Dashboard'],['users','👥 Users'],['subjects','📚 Subjects'],['mats','🗂️ Materials'],['ann','📢 Announcements']],faculty:[['dash','🏠 Dashboard'],['upload','⬆️ Upload'],['mine','🗂️ My Materials'],['ann','📢 Announcements']],student:[['dash','🏠 Dashboard'],['browse','🔎 Browse'],['saved','⭐ Saved'],['ann','📢 Announcements']]};
+function matList(list,mode){return list.map(m=>{const sv=(me.saved||[]).includes(m.id);return `<div class="mat"><div class="ico">${ICON[m.type]||'📄'}</div><div class="i"><b>${esc(m.title)}</b><p>${esc(m.desc)}</p><span class="tag">${esc(m.subject)}</span><span class="tag">${esc(m.unit)}</span><span class="tag">${esc(m.type)}</span><span class="note">${esc(m.by)} · ${m.date} · ⬇ ${m.dl}</span></div>${me.role==='student'?`<button class="star" title="Save" onclick="toggleSave(${m.id})">${sv?'★':'☆'}</button>`:''}<button class="b" onclick="dl(${m.id})">Download</button>${mode==='del'?`<button class="g" onclick="editMat(${m.id})">Edit</button><button class="d" onclick="delMat(${m.id})">Delete</button>`:''}</div>`}).join('')||'<p class="note">Nothing here yet.</p>'}
+const annBox=()=>`<div class="card"><h3>📢 Announcements</h3>${D.anns.slice().reverse().map(a=>`<div class="ann">${esc(a.text)}<div class="note">${esc(a.by)} · ${a.date}${(me.role==='admin'||a.uid===me.id)?` · <a href="#" onclick="delAnn(${a.id});return false">remove</a>`:''}</div></div>`).join('')||'<span class="note">None yet.</span>'}</div>`;
+const stat=(n,l)=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`;
+function pages(){const M=D.mats,sorted=M.slice().sort((a,b)=>b.date.localeCompare(a.date));
+ if(view==='dash'){const mine=M.filter(m=>m.uid===me.id);
+  let s=me.role==='admin'?stat(D.users.length,'Users')+stat(D.subjects.length,'Subjects')+stat(M.length,'Materials')+stat(M.reduce((a,m)=>a+m.dl,0),'Total downloads'):me.role==='faculty'?stat(mine.length,'My uploads')+stat(mine.reduce((a,m)=>a+m.dl,0),'Downloads of my files')+stat(D.subjects.length,'Subjects'):stat(M.length,'Materials')+stat(D.subjects.length,'Subjects')+stat((me.saved||[]).length,'Saved');
+  return `<div class="stats">${s}</div><div class="card"><h3>Recently added</h3>${matList(sorted.slice(0,3))}</div>`+annBox().replace('<h3>','<h3>')}
+ if(view==='browse')return `<div class="card"><div class="row"><div><label>Search</label><input id="q" value="${esc(F.q)}" placeholder="Search title or description…" oninput="filt()"></div><div><label>Subject</label><select id="fs" onchange="filt()"><option value="">All</option>${opts(D.subjects,F.s)}</select></div><div><label>Type</label><select id="ft" onchange="filt()"><option value="">All</option>${opts(TYPES,F.t)}</select></div><div><label>Sort by</label><select id="fo" onchange="filt()"><option value="new">Newest</option><option value="pop" ${F.o==='pop'?'selected':''}>Most downloaded</option></select></div></div><div id="res"></div></div>`;
+ if(view==='saved')return `<div class="card">${matList(M.filter(m=>(me.saved||[]).includes(m.id)))}</div>`;
+ if(view==='ann')return me.role==='student'?annBox():`<div class="card"><h3>Post announcement</h3><textarea id="at" rows="2" placeholder="Write an announcement…"></textarea><br><br><button class="b" onclick="addAnn()">Post</button></div>`+annBox();
+ if(view==='edit'){const m=D.mats.find(x=>x.id===editId);if(!m)return'';return `<div class="card"><h3>Edit material</h3><div class="row"><div><label>Title</label><input id="et" value="${esc(m.title)}"></div><div><label>Subject</label><select id="es">${opts(D.subjects,m.subject)}</select></div><div><label>Unit</label><select id="eu">${opts(UNITS,m.unit)}</select></div><div><label>Type</label><select id="ey">${opts(TYPES,m.type)}</select></div></div><div class="row"><div><label>Description</label><input id="ed" value="${esc(m.desc)}"></div><div><label>Replace file (optional) – current: ${esc(m.file)}</label><input type="file" id="ef"></div></div><button class="b" onclick="saveMat()">Save changes</button> <button class="g" onclick="nav(me.role==='admin'?'mats':'mine')">Cancel</button></div>`}
+ if(view==='upload')return `<div class="card"><h3>Upload material</h3><div class="row"><div><label>Title</label><input id="mt"></div><div><label>Subject</label><select id="ms">${opts(D.subjects)}</select></div><div><label>Unit</label><select id="mu">${opts(UNITS)}</select></div><div><label>Type</label><select id="my">${opts(TYPES)}</select></div></div><div class="row"><div><label>Description</label><input id="md"></div><div><label>File</label><input type="file" id="mf"></div></div><button class="b" onclick="addMat()">Upload</button><p class="note">Files are stored in this browser (max 25 MB each).</p></div>`;
+ if(view==='mine')return `<div class="card">${matList(M.filter(m=>m.uid===me.id),'del')}</div>`;
+ if(view==='mats')return `<div class="card">${matList(sorted,'del')}</div>`;
+ if(view==='subjects')return `<div class="card"><h3>Add subject</h3><div class="row"><input id="sn" placeholder="Subject name"></div><button class="b" onclick="addSub()">Add</button></div><div class="card">${D.subjects.map((s,i)=>`<div class="mat"><div class="i"><b>${esc(s)}</b><p>${M.filter(m=>m.subject===s).length} materials</p></div><button class="d" onclick="delSub(${i})">Remove</button></div>`).join('')}</div>`;
+ if(view==='users')return `<div class="card"><h3>Create user</h3><div class="row"><div><label>Name</label><input id="un"></div><div><label>Email</label><input id="ue"></div><div><label>Username / Reg. No.</label><input id="uu"></div><div><label>Temporary password</label><input id="up"></div><div><label>Role</label><select id="ur"><option>faculty</option><option>student</option><option>admin</option></select></div></div><div class="err" id="err"></div><button class="b" onclick="addUser()">Create</button></div><div class="card"><h3>All users</h3><div style="overflow-x:auto"><table class="table"><tr><th>Name</th><th>ID</th><th>Role</th><th></th></tr>${D.users.map(u=>`<tr><td>${esc(u.name)}<div class="note">${esc(u.email)}</div></td><td>${esc(show(u))}</td><td><span class="tag">${u.role}</span></td><td>${u.id===me.id?'':`<button class="g" onclick="resetPw(${u.id})">Reset</button> <button class="d" onclick="delUser(${u.id})">Remove</button>`}</td></tr>`).join('')}</table></div></div>`;
+ if(view==='profile'){const st=me.role==='student',fa=me.role==='faculty',mine=M.filter(m=>m.uid===me.id);
+ const av=me.photo?`<img src="${me.photo}" alt="">`:esc(ini(me.name));
+ const stats=st?stat((me.saved||[]).length,'Saved materials')+stat(me.dls||0,'Downloads')+stat(M.length,'Available materials'):fa?stat(mine.length,'Uploads')+stat(mine.reduce((a,m)=>a+m.dl,0),'Downloads received')+stat(new Set(mine.map(m=>m.subject)).size,'Subjects covered'):stat(D.users.length,'Users')+stat(M.length,'Materials')+stat(D.subjects.length,'Subjects');
+ const rec=st?M.filter(m=>(me.saved||[]).includes(m.id)).slice(0,3):fa?mine.slice(-3).reverse():[];
+ return `<div class="card pf"><div class="av">${av}</div><div class="pi"><h3 style="font-size:24px;margin:0">${esc(me.name)}</h3><div style="margin:4px 0"><span class="tag">${me.role}</span>${me.dept?`<span class="tag">${esc(me.dept)}</span>`:''}${st&&me.year?`<span class="tag">${esc(me.year)}</span>`:''}${fa&&me.desig?`<span class="tag">${esc(me.desig)}</span>`:''}</div><p class="note">${esc(show(me))} · ${esc(me.email)}${me.phone?' · '+esc(me.phone):''}</p>${me.bio?`<p>${esc(me.bio)}</p>`:'<p class="note">Add a short bio below.</p>'}<input type="file" id="pf" accept="image/*" hidden onchange="setPhoto(this)"><button class="g" onclick="$('#pf').click()">📷 ${me.photo?'Change':'Add'} photo</button>${me.photo?' <button class="g" onclick="rmPhoto()">Remove</button>':''}</div></div>
+ <div class="stats">${stats}</div>
+ <div class="card"><h3>Personal details</h3><div class="row"><div><label>${st?'Registration No.':'Username'}</label><input value="${esc(show(me))}" disabled></div><div><label>Full name</label><input id="pn" value="${esc(me.name)}"></div><div><label>Email</label><input id="pe" value="${esc(me.email)}"></div><div><label>Phone (optional)</label><input id="ph" value="${esc(me.phone)}" placeholder="10-digit number"></div>${me.role!=='admin'?`<div><label>Department</label><select id="pd">${opts(DEPTS,me.dept)}</select></div>`:''}${st?`<div><label>Year of study</label><select id="py">${opts(['1st Year','2nd Year','3rd Year','4th Year'],me.year)}</select></div>`:''}${fa?`<div><label>Designation</label><select id="pg">${opts(['Assistant Professor','Associate Professor','Professor','Lecturer'],me.desig)}</select></div>`:''}</div><div style="margin-bottom:12px"><label>About me</label><textarea id="pb" rows="2" maxlength="160" placeholder="A short bio (max 160 characters)">${esc(me.bio)}</textarea></div><div class="err" id="perr"></div><button class="b" onclick="saveProf()">Save changes</button> <span class="ok" id="pok"></span></div>
+ ${rec.length?`<div class="card"><h3>${st?'Recently saved':'Recent uploads'}</h3>${matList(rec)}</div>`:''}
+ <div class="card"><h3>Account & security</h3><div class="two"><p class="note" style="margin:0">📅 Member since: <b>${esc(me.joined||'2026-09-01')}</b></p><p class="note" style="margin:0">🕒 Last login: <b>${esc(me.prev||'First login')}</b></p></div><br><div class="row"><div><label>Current password</label><input id="p0" type="password"></div><div><label>New password</label><input id="p1" type="password" oninput="pwS()"><div class="sm"><i id="smb"></i></div><span class="note" id="smt"></span></div><div><label>Confirm new password</label><input id="p2" type="password"></div></div><div class="err" id="err"></div><button class="b" onclick="chPw()">Update password</button></div>`}
+}
+function render(){const A=$('#app');if(!D)return;if(!me){A.innerHTML=authView();return}
+ const t=[...NAV[me.role],['profile','👤 Profile']],title=(t.find(x=>x[0]===view)||[0,'✏️ Edit material'])[1].replace(/^\S+\s/,'');
+ A.innerHTML=`<div class="shell"><aside><div class="logo">Study<span>Mate</span></div><small>Study Material Helper</small>${t.map(x=>`<button class="${view===x[0]?'on':''}" onclick="nav('${x[0]}')">${x[1]}</button>`).join('')}<div class="sp"></div><div class="me">${esc(me.name)}<br>${me.role}</div><button onclick="theme()">🌓 Theme</button><button onclick="logout()">🚪 Logout</button></aside><main><div class="top"><h2>${view==='dash'?'Hello, '+esc(me.name.split(' ')[0]):title}</h2></div>${pages()}</main></div>`;
+ if(view==='browse')filt()}
+function filt(){F.q=$('#q').value;F.s=$('#fs').value;F.t=$('#ft').value;F.o=$('#fo').value;const q=F.q.toLowerCase();
+ let l=D.mats.filter(m=>(!q||(m.title+' '+m.desc).toLowerCase().includes(q))&&(!F.s||m.subject===F.s)&&(!F.t||m.type===F.t));
+ l.sort((a,b)=>F.o==='pop'?b.dl-a.dl:b.date.localeCompare(a.date));$('#res').innerHTML=matList(l)}
+function toggleSave(i){me.saved=me.saved||[];me.saved=me.saved.includes(i)?me.saved.filter(x=>x!==i):[...me.saved,i];save();view==='browse'?filt():render()}
+async function addUser(){const g=i=>$('#'+i).value.trim(),r=$('#ur').value,u=g('uu').toLowerCase(),e=$('#err');
+ if(!g('un')||!g('ue')||!u||g('up').length<6)return e.textContent='Fill all fields; password min 6 chars.';
+ if(r==='student'&&!RE.test(u))return e.textContent='Student ID must be RA2511 + 9 digits.';if(D.users.some(x=>x.username===u))return e.textContent='ID already exists.';if(!/^\S+@\S+\.\S+$/.test(g('ue')))return e.textContent='Enter a valid email address.';if(D.users.some(x=>(x.email||'').toLowerCase()===g('ue').toLowerCase()))return e.textContent='Email already in use.';
+ D.users.push({id:D.nid++,name:g('un'),email:g('ue'),username:u,pw:await enc(u,g('up')),role:r,saved:[],joined:today()});save();render()}
+async function resetPw(i){const u=D.users.find(x=>x.id===i),p=prompt('New temporary password for '+show(u)+' (min 6):');if(!p||p.length<6)return;u.pw=await enc(u.username,p);save();alert('Password reset.')}
+function delUser(i){if(confirm('Remove this user and their uploaded materials?')){D.mats.filter(m=>m.uid===i).forEach(m=>fdel(m.id));D.mats=D.mats.filter(m=>m.uid!==i);D.users=D.users.filter(u=>u.id!==i);save();render()}}
+const ini=n=>String(n).split(' ').filter(w=>w&&!/^(dr|prof)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'U';
+function saveProf(){const g=i=>$('#'+i)?$('#'+i).value.trim():undefined,n=g('pn'),e=g('pe'),ph=g('ph'),er=$('#perr');
+ if(!n)return er.textContent='Name cannot be empty.';if(!/^\S+@\S+\.\S+$/.test(e))return er.textContent='Enter a valid email address.';if(D.users.some(x=>x.id!==me.id&&(x.email||'').toLowerCase()===e.toLowerCase()))return er.textContent='This email is already in use.';if(ph&&!/^\d{10}$/.test(ph))return er.textContent='Phone must be 10 digits.';
+ const o=me.name;Object.assign(me,{name:n,email:e,phone:ph,bio:g('pb')});if(g('pd'))me.dept=g('pd');if(g('py'))me.year=g('py');if(g('pg'))me.desig=g('pg');
+ D.mats.forEach(m=>{if(m.uid===me.id)m.by=n});D.anns.forEach(a=>{if(a.uid===me.id)a.by=n});save();render();$('#pok').textContent='✓ Profile saved'}
+function setPhoto(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),z=Math.min(im.width,im.height);c.width=c.height=160;c.getContext('2d').drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,160,160);me.photo=c.toDataURL('image/jpeg',.8);save();render()};im.src=r.result};r.readAsDataURL(f)}
+function rmPhoto(){delete me.photo;save();render()}
+function pwS(){const p=$('#p1').value;let k=0;if(p.length>=6)k++;if(p.length>=10)k++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))k++;if(/\d/.test(p)&&/[^A-Za-z0-9]/.test(p))k++;const b=$('#smb');b.style.width=(p?k*25:0)+'%';b.style.background=['#b42318','#b42318','#d97706','#0f766e','#0f766e'][k];$('#smt').textContent=p?['Very weak','Weak','Fair','Good','Strong'][k]:''}
+async function chPw(){const e=$('#err');if(me.pw!==await enc(me.username,$('#p0').value))return e.textContent='Current password is incorrect.';const p=$('#p1').value;if(p.length<6)return e.textContent='Min 6 characters.';if(p!==$('#p2').value)return e.textContent='Passwords do not match.';me.pw=await enc(me.username,p);save();e.innerHTML='<span class="ok">Password updated.</span>'}
+function addSub(){const n=$('#sn').value.trim();if(!n||D.subjects.includes(n))return;D.subjects.push(n);save();render()}
+function delSub(i){const s=D.subjects[i];if(!confirm('Remove "'+s+'" and its materials?'))return;D.subjects.splice(i,1);D.mats=D.mats.filter(m=>m.subject!==s);save();render()}
+async function addMat(){const t=$('#mt').value.trim(),f=$('#mf').files[0];if(!t||!f)return alert('Enter a title and choose a file');const id=D.nid++;if(f.size>25e6)return alert('File too large (max 25 MB).');if(!await fput(id,f))return alert('Could not store the file in this browser.');D.mats.push({id,uid:me.id,title:t,desc:$('#md').value.trim(),subject:$('#ms').value,unit:$('#mu').value,type:$('#my').value,by:me.name,date:today(),file:f.name,dl:0});save();view='mine';render()}
+function editMat(i){const m=D.mats.find(x=>x.id===i);if(!m||(me.role!=='admin'&&m.uid!==me.id))return;editId=i;nav('edit')}
+async function saveMat(){const m=D.mats.find(x=>x.id===editId),t=$('#et').value.trim(),f=$('#ef').files[0];if(!t)return alert('Title cannot be empty.');
+ if(f){if(f.size>25e6)return alert('File too large (max 25 MB).');if(!await fput(m.id,f))return alert('Could not store the file.');m.file=f.name}
+ Object.assign(m,{title:t,subject:$('#es').value,unit:$('#eu').value,type:$('#ey').value,desc:$('#ed').value.trim()});save();nav(me.role==='admin'?'mats':'mine')}
+function delMat(i){if(!confirm('Delete this material?'))return;D.mats=D.mats.filter(m=>m.id!==i);fdel(i);save();render()}
+function addAnn(){const t=$('#at').value.trim();if(!t)return;D.anns.push({id:D.nid++,uid:me.id,text:t,by:me.name,date:today()});save();render()}
+function delAnn(i){D.anns=D.anns.filter(a=>a.id!==i);save();render()}
+async function dl(i){const m=D.mats.find(x=>x.id===i);m.dl++;if(me.role==='student')me.dls=(me.dls||0)+1;save();const fl=files[i]||await fget(i),b=fl||new Blob([`Demo placeholder for "${m.title}" (${m.subject}, ${m.unit}).`],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fl?m.file:m.file+'.txt';a.click();view==='browse'?filt():render()}
+// ===== AUTO LOGOUT (30 minutes of inactivity) =====
+const IDLE_MS=30*60*1000;let lastMark=0;
+function markActive(){const n=Date.now();if(me&&n-lastMark>5000){lastMark=n;try{localStorage.setItem('studymate_last',n)}catch(e){}}}
+['click','keydown','mousemove','touchstart','scroll'].forEach(ev=>addEventListener(ev,markActive,{passive:true}));
+setInterval(()=>{if(!me)return;let l=0;try{l=+localStorage.getItem('studymate_last')||0}catch(e){}
+ if(Date.now()-l>IDLE_MS){try{localStorage.removeItem('studymate_me')}catch(e){}me=null;mode='login';render();$('#err').textContent='You were logged out after 30 minutes of inactivity.'}},15000);
+init();
+</script></body></html>
