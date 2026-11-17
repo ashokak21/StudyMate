@@ -1,0 +1,8 @@
+{
+  "name": "studymate",
+  "version": "2.0.0",
+  "description": "StudyMate - study material sharing with a Node.js backend",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
